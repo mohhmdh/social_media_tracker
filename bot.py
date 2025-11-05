@@ -4,7 +4,8 @@ from discord.ext import commands
 import random
 
 # Import the Facebook function
-from fb_post import post_facebook
+from fb_post import post_facebook ,post_image_to_facebook , post_video_to_facebook
+
 
 intents = discord.Intents.all() #tells the Discord API what events the bot will receive (messages, members, reactions, presences, etc.).
 
@@ -77,5 +78,47 @@ async def postfb(ctx, *, message: str = None):
  #other           
     except Exception as e:
         await ctx.send(f" Unexpected error: {e}")
+
+
+
+@client.command()
+async def postimg(ctx, *, caption: str = ""):
+    if len(ctx.message.attachments) == 0:
+        return await ctx.send(" Please attach an image with the command!")
+
+    await ctx.send("Uploading to Facebook...")
+
+    attachment = ctx.message.attachments[0]
+    image_path = f"./{attachment.filename}"
+    await attachment.save(image_path)
+
+    loop = asyncio.get_running_loop()
+    result = await loop.run_in_executor(None, post_image_to_facebook, image_path, caption)
+
+    if isinstance(result, dict) and "post_id" in result or "id" in result:
+        await ctx.send(f" Image posted successfully!")
+    else:
+        await ctx.send(f" Error posting image: {result}")
+
+
+
+
+@client.command()
+async def postvideo(ctx, *, caption: str = ""):
+    if len(ctx.message.attachments) == 0:
+        return await ctx.send("Please attach a video with the command")
+
+    await ctx.send("Uploading ")
+
+    attachment = ctx.message.attachments[0]
+    video_path = f"./{attachment.filename}"
+    await attachment.save(video_path)
+
+    loop = asyncio.get_running_loop()
+    result = await loop.run_in_executor(None, post_video_to_facebook, video_path, caption)
+    if isinstance(result, dict) and "id" in result:
+        await ctx.send(f"Video posted successfully")
+    else:
+        await ctx.send(f" Error : {result}")
 
 client.run(TOKEN) #token of the bot , to contact it to the server (while creating it )
