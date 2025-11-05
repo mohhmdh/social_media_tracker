@@ -84,9 +84,9 @@ async def postfb(ctx, *, message: str = None):
 @client.command()
 async def postimg(ctx, *, caption: str = ""):
     if len(ctx.message.attachments) == 0:
-        return await ctx.send(" Please attach an image with the command!")
+        return await ctx.send(" attach an image with the command!")
 
-    await ctx.send("Uploading to Facebook...")
+    await ctx.send("Uploading to Facebook")
 
     attachment = ctx.message.attachments[0]
     image_path = f"./{attachment.filename}"
@@ -106,7 +106,7 @@ async def postimg(ctx, *, caption: str = ""):
 @client.command()
 async def postvideo(ctx, *, caption: str = ""):
     if len(ctx.message.attachments) == 0:
-        return await ctx.send("Please attach a video with the command")
+        return await ctx.send(" attach a video with the command")
 
     await ctx.send("Uploading ")
 

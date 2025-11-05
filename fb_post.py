@@ -1,7 +1,7 @@
 import requests #We use it to send HTTP requests to Facebook’s API (like POST, GET)
 
-page_id = "813845588484228" #Page ID of the Facebook Page you want to publish to
-page_token = "EAAaqSra2GZCoBPwXCs7yB12ZCMnWu34rDUOARfVZADTNZAw7cFZAmrTZCPYQRZCSczIOM1YALmHiPm92zx1G9YWjer5N2jZB52haB0al8vZBDZC0WRpq1PIgRrqoXeg3bignohZBuelWqPpr9w1jUhjEuGL2foKnXlmZBDLIPruKr0ZBvARIItZABD4ILdMCyU3tcwvQPsjNOJCZBZBEAXD9aWZArbnLsiQufIxS1on0GCSVRjRZBDZCNqp"
+page_id = "780419848498767" #Page ID of the Facebook Page you want to publish to
+page_token = "EAAaqSra2GZCoBP27kviOdsBl6GZAXHQ8rdsIpzCdyZCPidixhWwN9FXkMyCyanBHsA9fHgRbMaN1P6vHIUuPyi9ya4wPFLDUXdwAx1eYx9OwjwLha7hZBd7ZCxxMbRlaiuHJAn6WgdZAFCnbtw1WS0mjZBbjCLV8hqKJLzZAhOiOqI79nfnvRdbQh5nomNw5mpk8V5fjCcaDgYSEJbSXV7SvIXlhjuLYMJg5oxR9DiJwgmIC"
     
 def post_facebook(message: str): #post string
   #token of the page , to post 
@@ -19,7 +19,7 @@ def post_facebook(message: str): #post string
 
 
 def post_image_to_facebook(image_path: str, message: str = ""):
-    url = f"https://graph.facebook.com/v20.0/{page_id}/photos"
+    url = f"https://graph.facebook.com/v24.0/{page_id}/photos"
     files = {
         "source": open(image_path, "rb")
     }
