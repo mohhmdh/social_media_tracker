@@ -1,10 +1,21 @@
 from pymongo import MongoClient
+from urllib.parse import quote_plus
 from datetime import datetime
 
 class FacebookBotMongoDB:
     def __init__(self):
-        # Connect to MongoDB
-        self.client = MongoClient("mongodb://localhost:27017/")
+        # Your credentials
+        username = "MONGO_USER"
+        password = "MONGO_PASSWORD"
+        
+        # URL-encode them to handle the space in username
+        encoded_user = quote_plus(username)
+        encoded_pass = quote_plus(password)
+        
+        # Connect to MongoDB with authentication
+        self.client = MongoClient(
+            f"mongodb://{encoded_user}:{encoded_pass}@localhost:27017/"
+        )
         self.db = self.client["facebook_bot"]
         self.posts = self.db.scheduled_posts
     
